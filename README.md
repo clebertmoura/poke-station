@@ -21,7 +21,11 @@ NGINX acts as an efficient web server, reverse proxy, and load balancer, providi
 
 > Angular App
 
-Este componente representa a interface do usuário, onde é apresentado o índice de treinatores e seus pokemons. 
-A utilização do Angular no frontend oferece uma estrutura robusta e eficiente para o desenvolvimento de aplicações web modernas. Como um framework JavaScript mantido pelo Google, o Angular oferece uma arquitetura modular e componentizada que facilita a organização e manutenção do código-fonte. Além disso, Angular oferece uma poderosa biblioteca de componentes prontos para uso, suporte a injeção de dependências, e facilita a manipulação do estado da aplicação. Sua abordagem declarativa para construção de interfaces de usuário, juntamente com recursos como roteamento e gerenciamento de formulários, torna Angular uma escolha robusta para o desenvolvimento ágil, escalável e sustentável de aplicações frontend.
+This component represents the user interface, where the index of trainers and their pokemons is presented.
+Using Angular on the frontend offers a robust and efficient framework for developing modern web applications. As a JavaScript framework maintained by Google, Angular offers a modular, componentized architecture that makes it easier to organize and maintain source code. Additionally, Angular offers a powerful library of ready-to-use components, supports dependency injection, and makes it easy to manipulate application state. Its declarative approach to building user interfaces, along with features like routing and form management, makes Angular a robust choice for agile, scalable, and sustainable frontend application development.
+
+> Material Design Components
+
+The choice of Material Design is justified by its cohesive and visually attractive approach, providing a consistent and intuitive user experience across multiple platforms. Furthermore, the wide availability of pre-developed components facilitates the efficient and elegant implementation of interfaces, contributing to the design effectiveness and visual standardization of the application.
 
 
