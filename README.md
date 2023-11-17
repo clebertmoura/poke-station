@@ -17,6 +17,16 @@ This section describes the main components of the solution architecture and thei
 
 NGINX acts as an efficient web server, reverse proxy, and load balancer, providing a robust solution for optimizing network traffic in web environments. In the role of a reverse proxy, NGINX directs client requests to application servers, hiding the complexity of the underlying infrastructure. This approach increases security and improves performance by enabling horizontal scalability without directly exposing application servers. Additionally, as a load balancer, NGINX distributes requests among application servers in a balanced manner, promoting efficiency and high availability. Its lightweight design, modularity, and ability to handle thousands of simultaneous connections make NGINX a popular choice for improving the reliability and efficiency of web applications.
 
+> Services
+
+| Context      | Description                                 |
+| ------------ | ------------------------------------------- |
+| /            | Root context redirects to the frontend app  |
+| /backend     | Redirects to the backend spring boot app    |
+| /auth        | Redirects to Keycloak server                |
+| /splunk      | Redirects to Splunk server                  |
+
+
 ## Frontend
 
 > Angular App
