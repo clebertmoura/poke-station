@@ -43,14 +43,21 @@ The choice of Material Design is justified by its cohesive and visually attracti
 The backend component is built on the Spring Boot framework, and uses the libraries listed below, specially selected with the aim of promoting a robust, safe, efficient and scalable solution, maintaining the flexibility necessary for system evolution.
 
 > Spring Data 
+
 Its use simplifies data access and manipulation operations in the relational database, ensuring efficiency and productivity in development.
 
 > Spring GraphQL
+
 Provides a flexible, type-oriented query layer, enabling clients to request specific data efficiently, reducing transmitted data overhead.
 
 > Spring Security
+
 Ensures the protection of resources, implementing authentication and authorization in a scalable and configurable way. In addition to being easily integrated with the Identity Management System (Keycloak).
 
 > Logging (SLF4J)
+
 Provides a logging abstraction that is compatible with multiple implementations, providing flexibility in configuring and managing logs, essential for monitoring and troubleshooting in production environments. 
 
+## IAM (Keycloak)
+
+Adopting Keycloak as an Identity and Access Management (IAM) brings significant benefits to the proposed architecture. Providing a complete and scalable solution to manage identities, authentication and authorization, simplifying the complexity associated with the security of a distributed application. Reducing the development burden and ensuring a consistent approach to security across the entire application. Furthermore, compatibility with modern standards, such as JWT, OAuth 2.0 and OpenID Connect, facilitates integration with other external systems and services, promoting a more flexible and interoperable architecture.
