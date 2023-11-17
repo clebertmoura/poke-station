@@ -61,3 +61,15 @@ Provides a logging abstraction that is compatible with multiple implementations,
 ## IAM (Keycloak)
 
 Adopting Keycloak as an Identity and Access Management (IAM) brings significant benefits to the proposed architecture. Providing a complete and scalable solution to manage identities, authentication and authorization, simplifying the complexity associated with the security of a distributed application. Reducing the development burden and ensuring a consistent approach to security across the entire application. Furthermore, compatibility with modern standards, such as JWT, OAuth 2.0 and OpenID Connect, facilitates integration with other external systems and services, promoting a more flexible and interoperable architecture.
+
+## Logs & Monitoring
+
+Choosing Splunk as a tool for Monitoring and Auditing logs offers substantial benefits for the proposed architecture. Splunk is known as a leading operational intelligence platform that offers advanced solutions for log data management and analysis, as well as providing valuable insights for real-time monitoring, security, auditing, and data analysis. Its flexibility, scalability, and advanced features make it a popular choice across industries for log analysis, security monitoring, regulatory compliance, and more.
+
+## Data Layer (Postgres Database)
+
+Represents the Relational Database where the system persists the data.
+
+## Integration (PokéAPI)
+
+Represents the external API Services used to enrich the data information for Pokemons.
