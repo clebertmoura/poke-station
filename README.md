@@ -38,7 +38,19 @@ Using Angular on the frontend offers a robust and efficient framework for develo
 
 The choice of Material Design is justified by its cohesive and visually attractive approach, providing a consistent and intuitive user experience across multiple platforms. Furthermore, the wide availability of pre-developed components facilitates the efficient and elegant implementation of interfaces, contributing to the design effectiveness and visual standardization of the application.
 
-## Backend
+## Backend (Spring Boot App)
 
-The backend component is built on the Spring Boot framework, making use of Spring Data to simplify data access and manipulation operations in the relational database, ensuring efficiency and productivity in development. Choosing Spring GraphQL provides a flexible, type-driven query layer, enabling clients to request specific data efficiently, reducing data transmission overhead. Spring Security integration ensures resource protection, implementing authentication and authorization in a scalable and configurable way. Using SLF4J as a logging framework provides a logging abstraction that is compatible with multiple implementations, providing flexibility in configuring and managing logs, essential for monitoring and troubleshooting in production environments. These choices aim to promote a robust, secure and efficient backend, maintaining the flexibility necessary for the system's evolution.
+The backend component is built on the Spring Boot framework, and uses the libraries listed below, specially selected with the aim of promoting a robust, safe, efficient and scalable solution, maintaining the flexibility necessary for system evolution.
+
+> Spring Data 
+Its use simplifies data access and manipulation operations in the relational database, ensuring efficiency and productivity in development.
+
+> Spring GraphQL
+Provides a flexible, type-oriented query layer, enabling clients to request specific data efficiently, reducing transmitted data overhead.
+
+> Spring Security
+Ensures the protection of resources, implementing authentication and authorization in a scalable and configurable way. In addition to being easily integrated with the Identity Management System (Keycloak).
+
+> Logging (SLF4J)
+Provides a logging abstraction that is compatible with multiple implementations, providing flexibility in configuring and managing logs, essential for monitoring and troubleshooting in production environments. 
 
