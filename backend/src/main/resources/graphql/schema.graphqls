@@ -1,0 +1,39 @@
+type Trainer {
+    trainerId: ID!
+    name: String!
+    email: String!
+    instagramLink: String
+    pokemons: [Pokemon]
+}
+
+type Pokemon {
+    pokemonId: ID!
+    name: String!
+    ability: String!
+    experience: Int
+    trainer: Trainer!
+    abilities: [Ability]
+}
+
+type Ability {
+    abilityId: ID!
+    name: String!
+}
+
+type Query {
+    trainers: [Trainer]
+    trainer(trainerId: ID!): Trainer
+    pokemons: [Pokemon]
+    abilities: [Ability]
+    pokemonsByTrainer(trainerId: ID!): [Pokemon]
+    abilitiesByPokemon(pokemonId: ID!): [Ability]
+}
+
+type Mutation {
+    createTrainer(name: String!, email: String!, instagramLink: String): Trainer
+    createPokemon(trainerId: ID!, name: String!, ability: String!, experience: Int): Pokemon
+    createAbility(name: String!): Ability
+    assignAbility(pokemonId: ID!, abilityId: ID!): Pokemon
+    removePokemonFromTrainer(pokemonId: ID!, trainerId: ID!): Trainer
+    removeAbilityFromPokemon(pokemonId: ID!, abilityId: ID!): Pokemon
+}

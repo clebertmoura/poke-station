@@ -106,3 +106,17 @@ CREATE TABLE pokemon_abilities (
     FOREIGN KEY (ability_id) REFERENCES abilities(id)
 );
 ```
+
+# Source Code
+
+This section describes how the project structure, folders and files are organized.
+
+| Folder           | Description                                 |
+| ---------------- | ------------------------------------------- |
+| /                | Root context redirects to the frontend app  |
+| /docs            | Redirects to Splunk server                  |
+| /backend         | Redirects to the backend spring boot app    |
+| /backend/db      | Redirects to the backend spring boot app    |
+| /backend/src     | Redirects to the backend spring boot app    |
+| /frontend        | Redirects to Keycloak server                |
+| /frontend/src    | Redirects to Keycloak server                |

@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "backend"
+		},
+		{
+			"path": "frontend"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "interactive",
+		"java.compile.nullAnalysis.mode": "automatic"
+	}
+}
