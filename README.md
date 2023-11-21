@@ -1,5 +1,5 @@
 # poke-station
-This project is an challenge implementation for a Pokemon Trainer Index.
+This project is a challenge implementation for a Pokemon Trainer Index, demonstrating its architecture solution proposal and tech stack.
 
 # Solution Architecture Diagram
 
