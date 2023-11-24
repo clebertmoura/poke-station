@@ -21,6 +21,12 @@ RUN npm run build
 # Use official nginx image as the base image
 FROM nginx:1.25
 
+# Remove a configuração padrão do Nginx
+RUN rm /etc/nginx/conf.d/default.conf
+
+# Copia a sua configuração personalizada
+COPY nginx.conf /etc/nginx/nginx.conf
+
 # Copy the build output to replace the default nginx contents.
 COPY --from=build /usr/local/app/dist/frontend /usr/share/nginx/html
 

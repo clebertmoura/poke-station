@@ -70,17 +70,17 @@ services:
       - backend
       - keycloak
 
-  # frontend:
-  #   build: frontend
-  #   env_file: .env/dev.env
-  #   ports:
-  #     - "80:80"
-  #     - "443:443"
-  #   restart: always
-  #   networks:
-  #     - pokestation-network
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: frontend
+    env_file: .env/dev.env
+    ports:
+      - "7070:80"
+      - "7443:443"
+    restart: always
+    networks:
+      - pokestation-network
+    depends_on:
+      - backend
 
   # metabase:
   #   image: metabase/metabase:v0.36.7

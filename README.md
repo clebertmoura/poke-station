@@ -20,11 +20,11 @@ NGINX acts as an efficient web server, reverse proxy, and load balancer, providi
 > Services
 
 | Context      | Description                                 |
-| ------------ | ------------------------------------------- |
-| /            | Root context redirects to the frontend app  |
-| /backend     | Redirects to the backend spring boot app    |
-| /auth        | Redirects to Keycloak server                |
-| /splunk      | Redirects to Splunk server                  |
+| --------------------------- | ------------------------------------------- |
+| auth.pokestation.com        | Redirects to Keycloak server                |
+| app.pokestation.com         | Root context redirects to the frontend app  |
+| app.pokestation.com/backend | Redirects to the backend spring boot app    |
+| app.pokestation.com/splunk  | Redirects to Splunk server                  |
 
 
 ## Frontend
@@ -120,3 +120,19 @@ This section describes how the project structure, folders and files are organize
 | /backend/src     | Redirects to the backend spring boot app    |
 | /frontend        | Redirects to Keycloak server                |
 | /frontend/src    | Redirects to Keycloak server                |
+
+
+# Environment requirements
+
+1. Docker 24.x
+2. Node v20.9.x
+3. AngularCLI 17.x
+
+# Setup the environment
+
+1. Before running the docker-compose, we need to configure the following DNSs in your `/etc/hosts` file, to be able to access the application using these DNSs:
+
+```
+127.0.0.1       app.pokestation.com
+127.0.0.1       auth.pokestation.com
+```
