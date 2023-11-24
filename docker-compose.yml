@@ -11,6 +11,11 @@ services:
       - pokestation-postgres-data:/var/lib/postgresql/data
       - ./db/1-init.sql:/docker-entrypoint-initdb.d/1-init.sql
     restart: always
+    healthcheck:
+      test: ["CMD", "pg_isready"]
+      timeout: 10s
+      retries: 5
+      start_period: 5s
     networks:
       - pokestation-network
       
@@ -25,7 +30,8 @@ services:
     networks:
       - pokestation-network
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   keycloak:
     image: bitnami/keycloak:latest
@@ -34,10 +40,17 @@ services:
       - "9090:8080"
       - "9443:8443"
     restart: always
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/health/ready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
     networks:
       - pokestation-network
     depends_on:
-      - postgres
+      postgres:
+        condition: service_healthy
 
   backend:
     build: backend
@@ -52,8 +65,12 @@ services:
     networks:
       - pokestation-network
     depends_on:
-      - postgres
-      - keycloak
+      postgres:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+    extra_hosts:
+        - "auth.pokestation.com:192.168.3.9" #host and ip
 
   nginx:
     image: nginx:1.25.3
@@ -67,8 +84,10 @@ services:
     networks:
       - pokestation-network
     depends_on:
-      - backend
-      - keycloak
+      keycloak:
+        condition: service_healthy
+      backend:
+        condition: service_started
 
   frontend:
     build: frontend

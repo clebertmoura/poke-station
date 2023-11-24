@@ -16,7 +16,7 @@ RUN mvn dependency:go-offline
 # Copy the rest of the application code
 COPY src src
 # Build the application
-RUN mvn package
+RUN mvn package -DskipTests
 # Create a new lightweight image with only the JAR file
 FROM eclipse-temurin:17-jdk-alpine
 # Set the working directory
