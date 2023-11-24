@@ -22,10 +22,10 @@ RUN npm run build
 FROM nginx:1.25
 
 # Copy the build output to replace the default nginx contents.
-COPY --from=build /usr/local/app/dist/frontend /usr/share/nginx/html
+COPY --from=build /usr/local/app/dist/frontend/browser/ /usr/share/nginx/html/
 
 # Copia a sua configuração personalizada
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Expose port 80
 EXPOSE 80
