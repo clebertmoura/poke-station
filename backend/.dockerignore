@@ -1,0 +1,6 @@
+.git
+.editorconfig
+/.vscode
+/.data
+/target
+.gitignore
