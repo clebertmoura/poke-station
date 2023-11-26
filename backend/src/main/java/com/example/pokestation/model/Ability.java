@@ -11,17 +11,15 @@ import jakarta.persistence.SequenceGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
-import lombok.ToString;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
-@EqualsAndHashCode
-@ToString
 @Entity
 public class Ability {
 

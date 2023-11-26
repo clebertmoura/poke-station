@@ -24,26 +24,31 @@ public class WebSecurityConfig {
 
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity http, HandlerMappingIntrospector introspector) throws Exception {
-        http
+        return http
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize ->
-                authorize.requestMatchers(new MvcRequestMatcher(introspector, "/**")).hasRole("trainer")
-                .anyRequest().authenticated()
+                authorize
+                    .requestMatchers(new MvcRequestMatcher(introspector, "/**"))
+                        .permitAll()
             )
-            .oauth2ResourceServer(oauth2Configurer -> oauth2Configurer.jwt(jwtConfigurer -> jwtConfigurer.jwtAuthenticationConverter(jwt -> {
-                Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
-                Collection<String> roles = realmAccess.get("roles");
-                var grantedAuthorities = roles.stream()
-                    .map(role -> new SimpleGrantedAuthority(role))
-                    .toList();
-                return new JwtAuthenticationToken(jwt, grantedAuthorities);
-            })));
-        return http.build();
+            .oauth2ResourceServer(oauth2Configurer -> 
+                oauth2Configurer.jwt(jwtConfigurer -> 
+                    jwtConfigurer.jwtAuthenticationConverter(jwt -> {
+                        Map<String, Collection<String>> realmAccess = jwt.getClaim("realm_access");
+                        Collection<String> roles = realmAccess.get("roles");
+                        var grantedAuthorities = roles.stream()
+                            .map(role -> new SimpleGrantedAuthority(role))
+                            .toList();
+                        return new JwtAuthenticationToken(jwt, grantedAuthorities);
+                    })
+                )
+            )
+            .build();
     }
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().
+        return web -> web.ignoring().
             requestMatchers(new AntPathRequestMatcher("/h2-console/**"));
     }
 

@@ -3,7 +3,6 @@ package com.example.pokestation.model;
 import java.util.List;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.ForeignKey;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -17,10 +16,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@RequiredArgsConstructor
 @Builder
 @Entity
 public class Pokemon {
