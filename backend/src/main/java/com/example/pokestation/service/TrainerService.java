@@ -1,19 +1,16 @@
 package com.example.pokestation.service;
 
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
 import com.example.pokestation.model.Trainer;
 import com.example.pokestation.repository.TrainerRepository;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 @Slf4j
 public class TrainerService {
@@ -32,7 +29,7 @@ public class TrainerService {
         log.info("Saving trainer, email {}", email);
         var trainerEntity = new Trainer(name, email, instagramLink);
         var savedTrainer = trainerRepository.save(trainerEntity);
-        log.info("Saved trainer, {} ", savedTrainer);
+        log.info("Saved trainer, id {} ", savedTrainer.getId());
         return savedTrainer;
     }
 

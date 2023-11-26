@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import com.example.pokestation.model.Ability;
 import com.example.pokestation.service.AbilityService;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class AbilityController {
 
     private AbilityService abilityService;

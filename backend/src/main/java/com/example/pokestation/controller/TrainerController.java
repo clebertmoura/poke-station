@@ -10,10 +10,10 @@ import org.springframework.stereotype.Controller;
 import com.example.pokestation.model.Trainer;
 import com.example.pokestation.service.TrainerService;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class TrainerController {
 
     private TrainerService trainerService;

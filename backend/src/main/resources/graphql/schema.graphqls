@@ -1,5 +1,5 @@
 type Trainer {
-    trainerId: ID!
+    id: ID!
     name: String!
     email: String!
     instagramLink: String
@@ -7,7 +7,7 @@ type Trainer {
 }
 
 type Pokemon {
-    pokemonId: ID!
+    id: ID!
     name: String!
     experience: Int
     trainer: Trainer!
@@ -15,7 +15,7 @@ type Pokemon {
 }
 
 type Ability {
-    abilityId: ID!
+    id: ID!
     name: String!
 }
 

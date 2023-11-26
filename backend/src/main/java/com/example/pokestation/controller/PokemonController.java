@@ -7,18 +7,13 @@ import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Controller;
 
-import com.example.pokestation.model.Ability;
 import com.example.pokestation.model.Pokemon;
-import com.example.pokestation.model.Trainer;
-import com.example.pokestation.repository.AbilityRepository;
-import com.example.pokestation.repository.PokemonRepository;
-import com.example.pokestation.repository.TrainerRepository;
 import com.example.pokestation.service.PokemonService;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Controller
-@RequiredArgsConstructor
+@AllArgsConstructor
 public class PokemonController {
 
     private PokemonService pokemonService;

@@ -3,21 +3,18 @@ package com.example.pokestation.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Service;
 
 import com.example.pokestation.model.Ability;
 import com.example.pokestation.model.Pokemon;
-import com.example.pokestation.model.Trainer;
 import com.example.pokestation.repository.AbilityRepository;
 import com.example.pokestation.repository.PokemonRepository;
 import com.example.pokestation.repository.TrainerRepository;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 @Slf4j
 public class PokemonService {

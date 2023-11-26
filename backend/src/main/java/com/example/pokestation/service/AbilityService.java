@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import com.example.pokestation.model.Ability;
 import com.example.pokestation.repository.AbilityRepository;
 
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Service
 @Slf4j
 public class AbilityService {
