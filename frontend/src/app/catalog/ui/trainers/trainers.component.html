@@ -1,0 +1,9 @@
+<mat-grid-list cols="2" rowHeight="4:1">
+  <mat-grid-tile *ngFor="let trainer of trainers$ | async" style="background-color: aqua;">
+    <mat-card class="trainer-card">
+      <mat-card-title>{{ trainer.name }}</mat-card-title>
+      <mat-card-subtitle>{{ trainer.instagramLink }}</mat-card-subtitle>
+      <mat-card-content>Number of Pokemons: {{ trainer.pokemons?.length }}</mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

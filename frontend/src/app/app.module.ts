@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import { AuthModule } from './auth/auth.module';
 import { KeycloakAngularModule, KeycloakService } from 'keycloak-angular';
 import { environment } from '../environments/environment';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CatalogModule } from './catalog/catalog.module';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -31,13 +34,16 @@ function initializeKeycloak(keycloak: KeycloakService) {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     KeycloakAngularModule,
-    AuthModule
+    AuthModule,
+    HttpClientModule,
+    BrowserAnimationsModule,
+    CatalogModule
   ],
   providers: [
     {

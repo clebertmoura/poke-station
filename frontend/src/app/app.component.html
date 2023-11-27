@@ -1,4 +1,4 @@
-<button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
+<!-- <button *ngIf="isLoggedIn" type="button" (click)="logout()">Log out</button>
 <button *ngIf="!isLoggedIn" type="button" (click)="login()">Log in</button>
 
 <ng-container *ngIf="userProfile">
@@ -25,4 +25,6 @@
       <td>{{ userProfile.emailVerified ? 'Yes' : 'No' }}</td>
     </tr>
   </table>
-</ng-container>
+</ng-container> -->
+
+<router-outlet></router-outlet>
