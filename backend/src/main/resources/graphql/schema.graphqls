@@ -9,14 +9,7 @@ type Trainer {
 type Pokemon {
     id: ID!
     name: String!
-    experience: Int
     trainer: Trainer!
-    abilities: [Ability]
-}
-
-type Ability {
-    id: ID!
-    name: String!
 }
 
 type Query {
@@ -26,19 +19,10 @@ type Query {
     pokemons: [Pokemon]
     pokemon(pokemonId: ID!): Pokemon
     pokemonsByTrainer(trainerId: ID!): [Pokemon]
-
-    abilities: [Ability]
-    ability(abilityId: ID!): Ability
-    abilitiesByPokemon(pokemonId: ID!): [Ability]
 }
 
 type Mutation {
     createTrainer(name: String!, email: String!, instagramLink: String): Trainer
-    createPokemon(trainerId: ID!, name: String!, experience: Int): Pokemon
-    createAbility(name: String!): Ability
-
-    addAbilityToPokemon(abilityId: ID!, pokemonId: ID!): Pokemon
-    removeAbilityFromPokemon(abilityId: ID!, pokemonId: ID!): Pokemon
-
+    createPokemon(trainerId: ID!, name: String!): Pokemon
     removePokemon(pokemonId: ID!): Pokemon
 }

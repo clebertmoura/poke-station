@@ -1,13 +1,10 @@
 package com.example.pokestation.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.pokestation.model.Ability;
 import com.example.pokestation.model.Pokemon;
-import com.example.pokestation.repository.AbilityRepository;
 import com.example.pokestation.repository.PokemonRepository;
 import com.example.pokestation.repository.TrainerRepository;
 
@@ -21,7 +18,6 @@ public class PokemonService {
 
     private final PokemonRepository pokemonRepository;
     private final TrainerRepository trainerRepository;
-    private final AbilityRepository abilityRepository;
 
     public List<Pokemon> getPokemons() {
         return pokemonRepository.findAll();
@@ -35,12 +31,14 @@ public class PokemonService {
         return pokemonRepository.findByTrainerId(trainerId);
     }
 
-    public Pokemon createPokemon(String name, Integer experience, Long trainerId) {
+    public Pokemon createPokemon(String name, Long trainerId) {
         log.info("Saving pokemon, name {}", name);
-        var trainer = trainerRepository.findById(trainerId).orElse(null);
-        var pokemonEntity = new Pokemon(trainerId, name, experience, trainer, new ArrayList<>());
+        var pokemonEntity = new Pokemon(name);
+        pokemonEntity.setTrainer(
+            trainerRepository.findById(trainerId).orElse(null)
+        );
         var savedPokemon = pokemonRepository.save(pokemonEntity);
-        log.info("Saved ability, {} ", savedPokemon);
+        log.info("Saved pokemon, {} ", savedPokemon);
         return savedPokemon;
     }
 
@@ -50,33 +48,6 @@ public class PokemonService {
             log.info("Removing pokemon, name {}", pokemon.getName());
             pokemonRepository.delete(pokemon);
         }
-        return pokemon;
-    }
-
-    public Pokemon addAbilityToPokemon(Long abilityId, Long pokemonId) {
-        Pokemon pokemon = pokemonRepository.findById(pokemonId).orElse(null);
-        Ability ability = abilityRepository.findById(abilityId).orElse(null);
-        if (pokemon != null && ability != null
-            && !pokemon.getAbilities().contains(ability)) {
-            log.info("Adding ability {} to pokemon {}", ability.getName(), pokemon.getName());
-            pokemon.getAbilities().add(ability);
-            this.pokemonRepository.save(pokemon);
-        }
-        
-        return pokemon;
-    }
-
-    public Pokemon removeAbilityFromPokemon(Long abilityId, Long pokemonId) {
-
-        Pokemon pokemon = pokemonRepository.findById(pokemonId).orElse(null);
-        Ability ability = abilityRepository.findById(abilityId).orElse(null);
-        if (pokemon != null && ability != null
-            && pokemon.getAbilities().contains(ability)) {
-            log.info("Removing ability {} from pokemon {}", ability.getName(), pokemon.getName());
-            pokemon.getAbilities().remove(ability);
-            this.pokemonRepository.save(pokemon);
-        }
-        
         return pokemon;
     }
 

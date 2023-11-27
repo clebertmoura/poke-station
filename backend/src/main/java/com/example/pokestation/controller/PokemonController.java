@@ -36,29 +36,14 @@ public class PokemonController {
     @SchemaMapping(typeName = "Mutation")
     public Pokemon createPokemon(
         @Argument Long trainerId, 
-        @Argument String name, 
-        @Argument Integer experience) {
-        return pokemonService.createPokemon(name, experience, trainerId);
+        @Argument String name) {
+        return pokemonService.createPokemon(name, trainerId);
     }
 
     @SchemaMapping(typeName = "Mutation")
     public Pokemon removePokemon(
         @Argument Long pokemonId) {
         return pokemonService.removePokemon(pokemonId);
-    }
-
-    @SchemaMapping(typeName = "Mutation")
-    public Pokemon addAbilityToPokemon(
-        @Argument Long abilityId,
-        @Argument Long pokemonId) {
-        return pokemonService.addAbilityToPokemon(abilityId, pokemonId);
-    }
-
-    @SchemaMapping(typeName = "Mutation")
-    public Pokemon removeAbilityFromPokemon(
-        @Argument Long abilityId,
-        @Argument Long pokemonId) {
-        return pokemonService.removeAbilityFromPokemon(abilityId, pokemonId);
     }
 
 }
