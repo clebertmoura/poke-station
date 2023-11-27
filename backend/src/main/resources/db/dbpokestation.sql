@@ -114,3 +114,31 @@ ALTER TABLE ONLY public.pokemon
 -- PostgreSQL database dump complete
 --
 
+-- Insert test data for 'trainer' table
+INSERT INTO trainer (id, name, email, instagram_link) VALUES
+    (nextval('seq_trainer'), 'Ash Ketchum', 'ash@example.com', 'ash_ketchum_insta'),
+    (nextval('seq_trainer'), 'Misty Waterflower', 'misty@example.com', 'misty_insta'),
+    (nextval('seq_trainer'), 'Brock Pewter', 'brock@example.com', 'brock_insta'),
+    (nextval('seq_trainer'), 'Gary Oak', 'gary@example.com', 'gary_insta'),
+    (nextval('seq_trainer'), 'Serena Kalos', 'serena@example.com', 'serena_insta'),
+    (nextval('seq_trainer'), 'May Hoenn', 'may@example.com', 'may_insta'),
+    (nextval('seq_trainer'), 'Dawn Sinnoh', 'dawn@example.com', 'dawn_insta'),
+    (nextval('seq_trainer'), 'Cynthia Elite', 'cynthia@example.com', 'cynthia_insta'),
+    (nextval('seq_trainer'), 'Red Kanto', 'red@example.com', 'red_insta'),
+    (nextval('seq_trainer'), 'Ethan Johto', 'ethan@example.com', 'ethan_insta'),
+    (nextval('seq_trainer'), 'Nate Unova', 'nate@example.com', 'nate_insta');
+
+-- Insert test data for 'pokemon' table
+INSERT INTO pokemon (id, name, trainer_id) VALUES
+    (nextval('seq_pokemon'), 'Pikachu', 1),
+    (nextval('seq_pokemon'), 'Charmander', 1),
+    (nextval('seq_pokemon'), 'Squirtle', 2),
+    (nextval('seq_pokemon'), 'Bulbasaur', 3),
+    (nextval('seq_pokemon'), 'Vulpix', 4),
+    (nextval('seq_pokemon'), 'Eevee', 4),
+    (nextval('seq_pokemon'), 'Gyarados', 5),
+    (nextval('seq_pokemon'), 'Lapras', 6),
+    (nextval('seq_pokemon'), 'Garchomp', 7),
+    (nextval('seq_pokemon'), 'Lucario', 8),
+    (nextval('seq_pokemon'), 'Snorlax', 9),
+    (nextval('seq_pokemon'), 'Typhlosion', 10);

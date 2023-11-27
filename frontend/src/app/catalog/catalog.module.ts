@@ -7,11 +7,15 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatListModule } from '@angular/material/list';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 import { PokemonCardComponent } from './ui/pokemon-card/pokemon-card.component';
 import { TrainerDetailComponent } from './ui/trainer-detail/trainer-detail.component';
 import { TrainersComponent } from './ui/trainers/trainers.component';
+import { AddTrainerComponent } from './ui/add-trainer/add-trainer.component';
 
 
 
@@ -19,7 +23,8 @@ import { TrainersComponent } from './ui/trainers/trainers.component';
   declarations: [
     TrainersComponent,
     TrainerDetailComponent,
-    PokemonCardComponent
+    PokemonCardComponent,
+    AddTrainerComponent
   ],
   imports: [
     CommonModule,
@@ -31,6 +36,9 @@ import { TrainersComponent } from './ui/trainers/trainers.component';
     MatButtonModule,
     MatExpansionModule,
     MatListModule,
+    MatDialogModule,
+    MatInputModule,
+    MatFormFieldModule,
     NgbCarouselModule
   ]
 })

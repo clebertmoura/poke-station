@@ -2,76 +2,97 @@
 CREATE USER keycloak WITH PASSWORD 'keycloak@admin';
 CREATE DATABASE dbkeycloak WITH OWNER = keycloak ENCODING = 'UTF8';
 
--- CRIA A BASE DE DADOS DO POKE STATION
-CREATE TABLE ability
-(
+--
+-- TOC entry 215 (class 1259 OID 24576)
+-- Name: pokemon; Type: TABLE; Schema: public; Owner: pokestation
+--
+
+CREATE TABLE public.pokemon (
     id bigint NOT NULL,
     name character varying(255),
-    CONSTRAINT ability_pkey PRIMARY KEY (id)
+    trainer_id bigint
 );
 
-CREATE TABLE pokemon
-(
-    id bigint NOT NULL,
-    experience integer,
-    name character varying(255),
-    trainer_id bigint,
-    CONSTRAINT pokemon_pkey PRIMARY KEY (id),
-    CONSTRAINT pokemon_fk_trainer_id FOREIGN KEY (trainer_id) REFERENCES trainer (id)
-);
 
-CREATE TABLE pokemon_ability
-(
-    pokemon_id bigint NOT NULL,
-    ability_id bigint NOT NULL,
-    CONSTRAINT pokemon_ability_fk_ability_id FOREIGN KEY (ability_id)
-        REFERENCES ability (id),
-    CONSTRAINT pokemon_ability_fk_pokemon_id FOREIGN KEY (pokemon_id)
-        REFERENCES pokemon (id)
-);
+ALTER TABLE public.pokemon OWNER TO pokestation;
 
-CREATE TABLE trainer
-(
+--
+-- TOC entry 217 (class 1259 OID 26222)
+-- Name: seq_pokemon; Type: SEQUENCE; Schema: public; Owner: pokestation
+--
+
+CREATE SEQUENCE public.seq_pokemon
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.seq_pokemon OWNER TO pokestation;
+
+--
+-- TOC entry 218 (class 1259 OID 26223)
+-- Name: seq_trainer; Type: SEQUENCE; Schema: public; Owner: pokestation
+--
+
+CREATE SEQUENCE public.seq_trainer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER SEQUENCE public.seq_trainer OWNER TO pokestation;
+
+--
+-- TOC entry 216 (class 1259 OID 24584)
+-- Name: trainer; Type: TABLE; Schema: public; Owner: pokestation
+--
+
+CREATE TABLE public.trainer (
     id bigint NOT NULL,
     email character varying(255),
     instagram_link character varying(255),
-    name character varying(255),
-    CONSTRAINT trainer_pkey PRIMARY KEY (id)
+    name character varying(255)
 );
 
-CREATE SEQUENCE seq_ability
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    CACHE 1;
-CREATE SEQUENCE seq_pokemon
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    CACHE 1;
-CREATE SEQUENCE seq_trainer
-    INCREMENT 1
-    START 1
-    MINVALUE 1
-    MAXVALUE 9223372036854775807
-    CACHE 1;
+
+ALTER TABLE public.trainer OWNER TO pokestation;
+
+--
+-- TOC entry 3206 (class 2606 OID 24580)
+-- Name: pokemon pokemon_pkey; Type: CONSTRAINT; Schema: public; Owner: pokestation
+--
+
+ALTER TABLE ONLY public.pokemon
+    ADD CONSTRAINT pokemon_pkey PRIMARY KEY (id);
 
 
--- Insert test data for 'ability' table
-INSERT INTO ability (id, name) VALUES
-    (nextval('seq_ability'), 'Electric Shock'),
-    (nextval('seq_ability'), 'Fire Blast'),
-    (nextval('seq_ability'), 'Aqua Jet'),
-    (nextval('seq_ability'), 'Earthquake'),
-    (nextval('seq_ability'), 'Ice Beam'),
-    (nextval('seq_ability'), 'Thunderbolt'),
-    (nextval('seq_ability'), 'Solar Beam'),
-    (nextval('seq_ability'), 'Hydro Pump'),
-    (nextval('seq_ability'), 'Psychic'),
-    (nextval('seq_ability'), 'Shadow Ball'),
-    (nextval('seq_ability'), 'Dragon Pulse');
+--
+-- TOC entry 3208 (class 2606 OID 24590)
+-- Name: trainer trainer_pkey; Type: CONSTRAINT; Schema: public; Owner: pokestation
+--
+
+ALTER TABLE ONLY public.trainer
+    ADD CONSTRAINT trainer_pkey PRIMARY KEY (id);
+
+
+--
+-- TOC entry 3209 (class 2606 OID 24594)
+-- Name: pokemon pokemon_fk1; Type: FK CONSTRAINT; Schema: public; Owner: pokestation
+--
+
+ALTER TABLE ONLY public.pokemon
+    ADD CONSTRAINT pokemon_fk1 FOREIGN KEY (trainer_id) REFERENCES public.trainer(id);
+
+
+-- Completed on 2023-11-27 18:21:13 UTC
+
+--
+-- PostgreSQL database dump complete
+--
 
 -- Insert test data for 'trainer' table
 INSERT INTO trainer (id, name, email, instagram_link) VALUES
@@ -88,32 +109,16 @@ INSERT INTO trainer (id, name, email, instagram_link) VALUES
     (nextval('seq_trainer'), 'Nate Unova', 'nate@example.com', 'nate_insta');
 
 -- Insert test data for 'pokemon' table
-INSERT INTO pokemon (id, name, experience, trainer_id) VALUES
-    (nextval('seq_pokemon'), 'Pikachu', 100, 1),
-    (nextval('seq_pokemon'), 'Charmander', 80, 1),
-    (nextval('seq_pokemon'), 'Squirtle', 90, 2),
-    (nextval('seq_pokemon'), 'Bulbasaur', 85, 3),
-    (nextval('seq_pokemon'), 'Vulpix', 75, 4),
-    (nextval('seq_pokemon'), 'Eevee', 110, 4),
-    (nextval('seq_pokemon'), 'Gyarados', 120, 5),
-    (nextval('seq_pokemon'), 'Lapras', 95, 6),
-    (nextval('seq_pokemon'), 'Garchomp', 130, 7),
-    (nextval('seq_pokemon'), 'Lucario', 105, 8),
-    (nextval('seq_pokemon'), 'Snorlax', 150, 9),
-    (nextval('seq_pokemon'), 'Typhlosion', 115, 10);
-
--- Insert test data for 'pokemon_ability' table
-INSERT INTO pokemon_ability (pokemon_id, ability_id) VALUES
-    (1, 1), -- Pikachu has Electric Shock ability
-    (2, 2), -- Charmander has Fire Blast ability
-    (3, 3), -- Squirtle has Aqua Jet ability
-    (4, 1), -- Bulbasaur has Electric Shock ability
-    (4, 3), -- Bulbasaur has Aqua Jet ability
-    (5, 2), -- Vulpix has Fire Blast ability
-    (6, 4), -- Eevee has Earthquake ability
-    (7, 5), -- Gyarados has Ice Beam ability
-    (8, 6), -- Lapras has Thunderbolt ability
-    (9, 7), -- Garchomp has Solar Beam ability
-    (10, 8), -- Lucario has Hydro Pump ability
-    (11, 9), -- Snorlax has Psychic ability
-    (12, 10); -- Typhlosion has Shadow Ball ability
+INSERT INTO pokemon (id, name, trainer_id) VALUES
+    (nextval('seq_pokemon'), 'Pikachu', 1),
+    (nextval('seq_pokemon'), 'Charmander', 1),
+    (nextval('seq_pokemon'), 'Squirtle', 2),
+    (nextval('seq_pokemon'), 'Bulbasaur', 3),
+    (nextval('seq_pokemon'), 'Vulpix', 4),
+    (nextval('seq_pokemon'), 'Eevee', 4),
+    (nextval('seq_pokemon'), 'Gyarados', 5),
+    (nextval('seq_pokemon'), 'Lapras', 6),
+    (nextval('seq_pokemon'), 'Garchomp', 7),
+    (nextval('seq_pokemon'), 'Lucario', 8),
+    (nextval('seq_pokemon'), 'Snorlax', 9),
+    (nextval('seq_pokemon'), 'Typhlosion', 10);
