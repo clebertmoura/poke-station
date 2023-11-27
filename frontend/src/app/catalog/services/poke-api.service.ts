@@ -18,7 +18,6 @@ export class PokeApiService {
 
     return this.http.get<unknown>(url).pipe(
       map((response) => {
-        console.log(response);
         return response;
       })
     );
