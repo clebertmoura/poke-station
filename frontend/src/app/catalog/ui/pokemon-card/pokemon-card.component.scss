@@ -1,0 +1,11 @@
+.pokemon-card-wrapper {
+    min-width: 250px;
+    margin: 5px;
+    padding: 5px;
+
+    .galery {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}

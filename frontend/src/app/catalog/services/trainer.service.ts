@@ -25,11 +25,6 @@ export class TrainerService {
           pokemons {
             id
             name
-            experience
-            abilities {
-              id
-              name
-            }
           }
         }
       }
@@ -42,7 +37,7 @@ export class TrainerService {
     );
   }
 
-  getTrainerById(id: string): Observable<Trainer> {
+  getTrainerById(id: number): Observable<Trainer> {
     const query = `
       query {
         trainer(trainerId: "${id}") {
@@ -53,11 +48,6 @@ export class TrainerService {
           pokemons {
             id
             name
-            experience
-            abilities {
-              id
-              name
-            }
           }
         }
       }

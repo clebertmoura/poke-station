@@ -1,0 +1,17 @@
+<div class="trainer-wrapper" *ngIf="trainer$ | async as trainer">
+  <div class="header">
+    <button mat-icon-button aria-label="Button to actions" (click)="goBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <div class="header__title">{{ trainer.name }}'s Bio</div>
+    <button mat-icon-button aria-label="Button to actions">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="cards-grid">
+    <app-pokemon-card
+      *ngFor="let pokemon of trainer.pokemons"
+      [pokemon]="pokemon"
+    ></app-pokemon-card>
+  </div>
+</div>

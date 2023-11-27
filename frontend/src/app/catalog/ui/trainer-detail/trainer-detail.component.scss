@@ -1,4 +1,4 @@
-.trainers-wrapper {
+.trainer-wrapper {
 
     .header {
         display: flex; 
@@ -20,12 +20,6 @@
 
         display: flex; 
         flex-flow: row wrap;
-
-        .trainer-card {
-            min-width: 250px;
-            margin: 5px;
-            padding: 5px;
-        }
 
     }
 

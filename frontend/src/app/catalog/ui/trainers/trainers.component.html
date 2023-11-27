@@ -1,9 +1,27 @@
-<mat-grid-list cols="2" rowHeight="4:1">
-  <mat-grid-tile *ngFor="let trainer of trainers$ | async" style="background-color: aqua;">
-    <mat-card class="trainer-card">
-      <mat-card-title>{{ trainer.name }}</mat-card-title>
-      <mat-card-subtitle>{{ trainer.instagramLink }}</mat-card-subtitle>
-      <mat-card-content>Number of Pokemons: {{ trainer.pokemons?.length }}</mat-card-content>
+<div class="trainers-wrapper">
+  <div class="header">
+    <div class="header__title">
+      Pokemons Trainer Index
+    </div>
+    <button mat-icon-button aria-label="Button to create new Trainer">
+      <mat-icon>add_circle</mat-icon>
+    </button>
+  </div>
+  <div class="cards-grid">
+    <mat-card class="trainer-card" *ngFor="let trainer of trainers$ | async"
+        (click)="viewTrainer(trainer)">
+      <mat-card-header>
+        <mat-card-title>{{ trainer.name }}</mat-card-title>
+        <mat-card-subtitle>{{ trainer.instagramLink }}</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Number of Pokemons: {{ trainer.pokemons?.length }}
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button>POKEMONS</button>
+      </mat-card-actions>
     </mat-card>
-  </mat-grid-tile>
-</mat-grid-list>
+  </div>
+</div>

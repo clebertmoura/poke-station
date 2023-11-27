@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CatalogModule } from './catalog/catalog.module';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 function initializeKeycloak(keycloak: KeycloakService) {
   return () =>
@@ -43,7 +44,8 @@ function initializeKeycloak(keycloak: KeycloakService) {
     AuthModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    CatalogModule
+    CatalogModule,
+    NgbModule
   ],
   providers: [
     {

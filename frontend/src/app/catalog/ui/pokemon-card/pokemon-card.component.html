@@ -1,0 +1,95 @@
+<mat-card
+  class="pokemon-card-wrapper"
+  *ngIf="pokemonData$ | async as pokemonData"
+>
+  <mat-card-header>
+    <mat-card-title>{{ pokemon.name }}</mat-card-title>
+    <mat-card-subtitle
+      >Experience: {{ pokemonData.base_experience }}</mat-card-subtitle
+    >
+  </mat-card-header>
+  <ngb-carousel [interval]="2000">
+    <ng-template ngbSlide>
+      <div class="galery">
+        <img
+          [src]="pokemonData.sprites.front_default"
+          alt="Random first slide"
+        />
+      </div>
+    </ng-template>
+    <ng-template ngbSlide>
+      <div class="galery">
+        <img
+          [src]="pokemonData.sprites.back_default"
+          alt="Random first slide"
+        />
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <mat-card-content>
+    <mat-list role="list">
+      <mat-list-item role="listitem">
+        <label>Height:</label> {{ pokemonData.height }}
+      </mat-list-item>
+      <mat-list-item role="listitem">
+        <label>Weight:</label> {{ pokemonData.weight }}
+      </mat-list-item>
+    </mat-list>
+    <div>
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Abilities
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of pokemonData.abilities">
+              {{ item.ability.name }}
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Stats
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of pokemonData.stats">
+              {{ item.stat.name }} (base stat: {{ item.base_stat }} / effort: {{ item.effort }})
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Moves
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of pokemonData.moves">
+              {{ item.move.name }}
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              Types
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-list role="list">
+            <mat-list-item role="listitem" *ngFor="let item of pokemonData.types">
+              {{ item.type.name }}
+            </mat-list-item>
+          </mat-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+    </div>
+  </mat-card-content>
+</mat-card>

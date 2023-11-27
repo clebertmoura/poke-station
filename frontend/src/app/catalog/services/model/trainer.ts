@@ -1,7 +1,7 @@
 import { Pokemon } from './pokemon';
 
 export interface Trainer {
-  id: string;
+  id: number;
   name: string;
   email: string;
   instagramLink?: string;
