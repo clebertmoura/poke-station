@@ -116,7 +116,12 @@ This section describes how the project structure, folders and files are organize
 
 # Setup the environment
 
-1. Before running the docker-compose, we need to configure the following DNSs in your `/etc/hosts` file, to be able to access the application using these DNSs:
+This application is ready to be executed using localhost DNS or the specific DNSs below:
+
+- app.pokestation.com
+- auth.pokestation.com
+
+To use the specific DNSs, before running the docker-compose, we need to configure the following DNSs in your `/etc/hosts` file, to be able to access the application using these DNSs:
 
 ```
 127.0.0.1       app.pokestation.com
@@ -131,9 +136,7 @@ This section describes how the project structure, folders and files are organize
 
 * The --build is required in the first time, or when something is modified in the project.
 
-2. Recover the keycloak database backup from file: `./backend/src/main/resources/db/dbkeycloak.sql`
-
-3. After all containers has started, open the browser with the URL: http://app.pokestation.com
+2. After all containers has started, open the browser with the URL: http://localhost and use one of the users below.
 
 # Testing users
 
