@@ -110,7 +110,7 @@ This section describes how the project structure, folders and files are organize
 
 # Environment requirements
 
-1. Docker 24.x
+1. Docker 24.x with docker-compose
 2. Node v20.9.x
 3. AngularCLI 17.x
 
@@ -122,3 +122,15 @@ This section describes how the project structure, folders and files are organize
 127.0.0.1       app.pokestation.com
 127.0.0.1       auth.pokestation.com
 ```
+
+# Runningthe Solution
+
+1. To start the solution execute the following command:
+
+> docker-compose up -d --build
+
+* The --build is required in the first time, or when something is modified in the project.
+
+2. Recover the keycloak database backup from file: `./backend/src/main/resources/db/dbkeycloak.sql`
+
+3. After all containers has started, open the browser with the URL: http://app.pokestation.com
