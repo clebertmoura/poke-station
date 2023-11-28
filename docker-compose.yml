@@ -15,7 +15,7 @@ services:
       test: ["CMD", "pg_isready"]
       timeout: 10s
       retries: 5
-      start_period: 5s
+      start_period: 30s
     networks:
       - pokestation-network
       
@@ -34,18 +34,21 @@ services:
         condition: service_healthy
 
   keycloak:
-    image: bitnami/keycloak:latest
+    image: quay.io/keycloak/keycloak:22.0.5
     env_file: .env/dev.env
     ports:
       - "9090:8080"
       - "9443:8443"
+    entrypoint: '/opt/keycloak/bin/kc.sh start-dev --import-realm'
+    volumes:
+      - ./conf/keycloak/import/:/opt/keycloak/data/import:ro
     restart: always
     healthcheck:
       test: ["CMD", "curl", "--fail", "http://localhost:8080/health/ready"]
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 5s
+      start_period: 230s
     networks:
       - pokestation-network
     depends_on:
