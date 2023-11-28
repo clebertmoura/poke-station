@@ -134,3 +134,10 @@ This section describes how the project structure, folders and files are organize
 2. Recover the keycloak database backup from file: `./backend/src/main/resources/db/dbkeycloak.sql`
 
 3. After all containers has started, open the browser with the URL: http://app.pokestation.com
+
+# Testing users
+
+| login  | password |
+| ------ | -------- |
+| admin  | admin    |
+| user   | user     |

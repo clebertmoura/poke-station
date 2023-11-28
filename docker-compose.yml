@@ -33,6 +33,23 @@ services:
       postgres:
         condition: service_healthy
 
+  nginx:
+    image: nginx:1.25.3
+    env_file: .env/dev.env
+    restart: always
+    volumes:
+      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - pokestation-network
+    # depends_on:
+    #   keycloak:
+    #     condition: service_started
+    #   backend:
+    #     condition: service_started
+
   keycloak:
     image: quay.io/keycloak/keycloak:22.0.5
     env_file: .env/dev.env
@@ -44,11 +61,11 @@ services:
       - ./conf/keycloak/import/:/opt/keycloak/data/import:ro
     restart: always
     healthcheck:
-      test: ["CMD", "curl", "--fail", "http://localhost:8080/health/ready"]
+      test: "curl -f http://keycloak:8080/health"
       interval: 10s
       timeout: 5s
       retries: 5
-      start_period: 230s
+      start_period: 120s
     networks:
       - pokestation-network
     depends_on:
@@ -65,31 +82,18 @@ services:
       - ./backend:/usr/src/app
     command: ["./mvnw", "spring-boot:run"]
     restart: always
+    # healthcheck:
+    #   test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
+    #   interval: 10s
+    #   timeout: 5s
+    #   retries: 5
+    #   start_period: 120s
     networks:
       - pokestation-network
     depends_on:
       postgres:
         condition: service_healthy
       keycloak:
-        condition: service_healthy
-    extra_hosts:
-        - "auth.pokestation.com:192.168.3.9" #host and ip
-
-  nginx:
-    image: nginx:1.25.3
-    env_file: .env/dev.env
-    restart: always
-    volumes:
-      - ./conf/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-    ports:
-      - "80:80"
-      - "443:443"
-    networks:
-      - pokestation-network
-    depends_on:
-      keycloak:
-        condition: service_healthy
-      backend:
         condition: service_started
 
   frontend:
