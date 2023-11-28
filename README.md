@@ -78,32 +78,18 @@ Represents the external API Services used to enrich the data information for Pok
 
 ```db/pokedb.sql```:
 ```sql
-CREATE TABLE trainers (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL,
-    instagram_profile VARCHAR(255) NOT NULL
+CREATE TABLE trainer (
+    id bigint NOT NULL PRIMARY KEY,
+    email character varying(255),
+    instagram_link character varying(255),
+    name character varying(255)
 );
 
 CREATE TABLE pokemon (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
-    experience INT NOT NULL,
-    trainer_id INT,
-    FOREIGN KEY (trainer_id) REFERENCES trainers(id)
-);
-
-CREATE TABLE abilities (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE pokemon_abilities (
-    pokemon_id INT,
-    ability_id INT,
-    PRIMARY KEY (pokemon_id, ability_id),
-    FOREIGN KEY (pokemon_id) REFERENCES pokemon(id),
-    FOREIGN KEY (ability_id) REFERENCES abilities(id)
+    id bigint NOT NULL PRIMARY KEY,
+    name character varying(255),
+    trainer_id bigint,
+    FOREIGN KEY (trainer_id) REFERENCES trainer(id)
 );
 ```
 
@@ -114,12 +100,12 @@ This section describes how the project structure, folders and files are organize
 | Folder           | Description                                 |
 | ---------------- | ------------------------------------------- |
 | /                | Root context redirects to the frontend app  |
-| /docs            | Redirects to Splunk server                  |
-| /backend         | Redirects to the backend spring boot app    |
-| /backend/db      | Redirects to the backend spring boot app    |
-| /backend/src     | Redirects to the backend spring boot app    |
-| /frontend        | Redirects to Keycloak server                |
-| /frontend/src    | Redirects to Keycloak server                |
+| /.env            | Configure Env variables for containers      |
+| /docs            | Documentations                              |
+| /conf            | Some configurations used by containers      |
+| /db              | Initial schema                              |
+| /backend         | Backend implemented with spring boot        |
+| /frontend        | Frontend implemented with Angular           |
 
 
 # Environment requirements
