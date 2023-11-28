@@ -2,7 +2,9 @@ import { Component } from '@angular/core';
 import { Trainer } from '../../services/model/trainer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TrainerService } from '../../services/trainer.service';
-import { Observable } from 'rxjs';
+import { Observable, pipe, tap } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddPokemonComponent } from '../add-pokemon/add-pokemon.component';
 
 @Component({
   selector: 'app-trainer-detail',
@@ -17,18 +19,34 @@ export class TrainerDetailComponent {
   constructor(
     private route: ActivatedRoute, 
     private router: Router,
+    private dialog: MatDialog,
     private trainerService: TrainerService) {
   }
 
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.trainerId = params['id'];
-      this.trainer$ = this.trainerService.getTrainerById(this.trainerId!);
+      this.loadTrainer();
     });
+  }
+
+  private loadTrainer() {
+    this.trainer$ = this.trainerService.getTrainerById(this.trainerId!);
   }
 
   goBack(): void {
     this.router.navigate(['/']);
   }
 
+  addPokemon(): void {
+    const dialogRef = this.dialog.open(AddPokemonComponent, {
+      data: {
+        trainerId: this.trainerId
+      },
+    });
+    dialogRef.componentInstance!.trainerId = this.trainerId!;
+    dialogRef.componentInstance!.newPokemonAdded.subscribe((pokemon) => {
+      this.loadTrainer();
+    });
+  }
 }

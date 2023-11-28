@@ -1,24 +1,29 @@
 <div class="add-trainer-wrapper">
   <h2 mat-dialog-title>Add new Trainer</h2>
 
-  <form (ngSubmit)="submitForm()">
+  <form [formGroup]="trainerForm" (ngSubmit)="submitForm()">
     <mat-dialog-content class="form-content">
       <mat-form-field>
         <mat-label>Name</mat-label>
-        <input matInput />
+        <input matInput cdkFocusInitial formControlName="name" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>E-mail</mat-label>
-        <input matInput type="email" />
+        <input matInput type="email" formControlName="email" />
       </mat-form-field>
       <mat-form-field>
         <mat-label>Instagram Link</mat-label>
-        <input matInput />
+        <input matInput formControlName="instagramLink" />
       </mat-form-field>
     </mat-dialog-content>
     <mat-dialog-actions align="end">
       <button mat-button mat-dialog-close>Cancel</button>
-      <button mat-button [mat-dialog-close]="true" cdkFocusInitial>
+      <button
+        mat-button
+        [mat-dialog-close]="true"
+        (click)="submitForm()"
+        [disabled]="this.trainerForm.untouched || !this.trainerForm.valid"
+      >
         Confirm
       </button>
     </mat-dialog-actions>

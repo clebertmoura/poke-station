@@ -4,7 +4,8 @@
       <mat-icon>arrow_back</mat-icon>
     </button>
     <div class="header__title">{{ trainer.name }}'s Bio</div>
-    <button mat-icon-button aria-label="Button to actions">
+    <button mat-icon-button aria-label="Button to Add a Pokemon to the Trainer"
+      (click)="addPokemon()">
       <mat-icon>add_circle</mat-icon>
     </button>
   </div>

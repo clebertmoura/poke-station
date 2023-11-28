@@ -1,0 +1,28 @@
+<div class="add-pokemon-wrapper">
+  <h2 mat-dialog-title>Add new Pokemon</h2>
+
+  <form [formGroup]="pokemonForm" (ngSubmit)="submitForm()">
+    <mat-dialog-content class="form-content">
+      <mat-form-field>
+        <mat-label>Select a Pokémon</mat-label>
+        <mat-select (opened)="loadMore()" formControlName="name">
+          <mat-option *ngFor="let pokemon of pokemons" [value]="pokemon.name">
+            {{ pokemon.name }}
+          </mat-option>
+          <mat-option *ngIf="loading" disabled>Loading...</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+      <button mat-button mat-dialog-close>Cancel</button>
+      <button
+        mat-button
+        [mat-dialog-close]="true"
+        (click)="submitForm()"
+        [disabled]="this.pokemonForm.untouched || !this.pokemonForm.valid"
+      >
+        Confirm
+      </button>
+    </mat-dialog-actions>
+  </form>
+</div>

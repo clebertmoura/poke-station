@@ -21,6 +21,10 @@ export class TrainersComponent {
     private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.loadTrainers();
+  }
+
+  private loadTrainers() {
     this.trainers$ = this.trainerService.getTrainers();
   }
 
@@ -28,7 +32,10 @@ export class TrainersComponent {
     this.router.navigate(['/trainer', trainer.id]);
   }
 
-  addTraier(): void {
-    this.dialog.open(AddTrainerComponent);
+  addTrainer(): void {
+    const dialogRef = this.dialog.open(AddTrainerComponent);
+    dialogRef.componentInstance?.newTrainerAdded.subscribe((trainer) => {
+      this.loadTrainers();
+    });
   }
 }

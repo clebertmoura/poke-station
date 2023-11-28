@@ -23,4 +23,15 @@ export class PokeApiService {
     );
   }
 
+  getPokemons(offset: number, limit: number): Observable<any> {
+    
+    const url = `${this.apiUrl}/pokemon?offset=${offset}&limit=${limit}`;
+
+    return this.http.get<any>(url).pipe(
+      map((response) => {
+        return response;
+      })
+    );
+  }
+
 }

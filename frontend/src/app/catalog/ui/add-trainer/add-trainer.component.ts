@@ -1,5 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
+import {
+  MatSnackBar,
+  MatSnackBarHorizontalPosition,
+  MatSnackBarVerticalPosition,
+} from '@angular/material/snack-bar';
+import { Trainer } from '../../services/model/trainer';
 import { TrainerService } from '../../services/trainer.service';
 
 @Component({
@@ -7,21 +18,55 @@ import { TrainerService } from '../../services/trainer.service';
   templateUrl: './add-trainer.component.html',
   styleUrl: './add-trainer.component.scss',
 })
-export class AddTrainerComponent implements OnInit {
-  trainerForm?: FormGroup;
+export class AddTrainerComponent {
+  trainerForm: FormGroup;
+
+  @Output() newTrainerAdded: EventEmitter<Trainer> = new EventEmitter();
 
   constructor(
-    private formBuilder: FormBuilder,
+    private fb: FormBuilder,
+    private snackBar: MatSnackBar,
     private trainerService: TrainerService
-  ) {}
-
-  ngOnInit(): void {
-    this.trainerForm = this.formBuilder.group({
-      name: ['', [Validators.required, Validators.maxLength(255)]],
-      email: ['', [Validators.required, Validators.maxLength(255), Validators.email]],
-      instagramLink: ['', [Validators.required, Validators.maxLength(255)]],
+  ) {
+    this.trainerForm = this.fb.group({
+      name: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255),
+      ]),
+      email: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255),
+        Validators.email,
+      ]),
+      instagramLink: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255),
+      ]),
     });
   }
 
-  submitForm(): void {}
+  submitForm(): void {
+    if (this.trainerForm.valid) {
+      this.trainerService
+        .createTrainer(
+          this.trainerForm.value['name'],
+          this.trainerForm.value['email'],
+          this.trainerForm.value['instagramLink']
+        )
+        .subscribe((createdTrainer) => {
+          this.snackBar.open('The trainer was created!', 'Success!', {
+            horizontalPosition: 'right',
+            verticalPosition: 'top',
+            duration: 3000
+          });
+          this.newTrainerAdded.emit(createdTrainer);
+        });
+    } else {
+      this.snackBar.open('Trainer`s data is invalid!', 'Attention!', {
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        duration: 3000
+      });
+    }
+  }
 }

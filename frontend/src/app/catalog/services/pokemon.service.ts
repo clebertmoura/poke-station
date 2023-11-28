@@ -3,82 +3,63 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
-import { Trainer } from './model/trainer';
+import { Pokemon } from './model/pokemon';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TrainerService {
-
+export class PokemonService {
   private apiUrl = `${environment.backendUrl}/graphql`;
 
   constructor(private http: HttpClient) {}
 
-  getTrainers(): Observable<Trainer[]> {
+  getPokemons(): Observable<Pokemon[]> {
     const query = `
       query {
-        trainers {
+        pokemons {
           id
           name
-          email
-          instagramLink
-          pokemons {
-            id
-            name
-          }
         }
       }
     `;
 
     return this.http.post<any>(this.apiUrl, { query }).pipe(
       map((response) => {
-        return response.data.trainers as Trainer[];
+        return response.data.pokemons as Pokemon[];
       })
     );
   }
 
-  getTrainerById(id: number): Observable<Trainer> {
+  getPokemonById(id: number): Observable<Pokemon> {
     const query = `
       query {
-        trainer(trainerId: "${id}") {
+        pokemon(pokemonId: "${id}") {
           id
           name
-          email
-          instagramLink
-          pokemons {
-            id
-            name
-          }
         }
       }
     `;
 
     return this.http.post<any>(this.apiUrl, { query }).pipe(
       map((response) => {
-        return response.data.trainer as Trainer;
+        return response.data.trainer as Pokemon;
       })
     );
   }
 
-  createTrainer(name: string, email: string, instagramLink: string): Observable<Trainer> {
+  createPokemon(name: string, trainerId: number): Observable<Pokemon> {
     const query = `
       mutation {
-        createTrainer(
-          email: "${email}"
-          name: "${name}"
-          instagramLink: "${instagramLink}"
-        ) {
+        createPokemon(name: "${name}", trainerId: "${trainerId}") {
           id
-          instagramLink
           name
-          email
         }
       }
     `;
 
     return this.http.post<any>(this.apiUrl, { query }).pipe(
       map((response) => {
-        return response.data.createTrainer as Trainer;
+        return response.data.createPokemon as Pokemon;
       })
     );
   }
