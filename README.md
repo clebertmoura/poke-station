@@ -19,12 +19,12 @@ NGINX acts as an efficient web server, reverse proxy, and load balancer, providi
 
 > Services
 
-| Context      | Description                                 |
-| --------------------------- | ------------------------------------------- |
-| auth.pokestation.com        | Redirects to Keycloak server                |
-| app.pokestation.com         | Root context redirects to the frontend app  |
-| app.pokestation.com/backend | Redirects to the backend spring boot app    |
-| app.pokestation.com/splunk  | Redirects to Splunk server                  |
+| Context      | Description                    |
+| ------------ | ------------------------------ |
+| /            | Frontend App                   |
+| /backend     | Backend App                    |
+| /admin       | Keycloak Server Admin console  |
+| /splunk      | Splunk Server                  |
 
 
 ## Frontend
@@ -62,7 +62,7 @@ Provides a logging abstraction that is compatible with multiple implementations,
 
 Adopting Keycloak as an Identity and Access Management (IAM) brings significant benefits to the proposed architecture. Providing a complete and scalable solution to manage identities, authentication and authorization, simplifying the complexity associated with the security of a distributed application. Reducing the development burden and ensuring a consistent approach to security across the entire application. Furthermore, compatibility with modern standards, such as JWT, OAuth 2.0 and OpenID Connect, facilitates integration with other external systems and services, promoting a more flexible and interoperable architecture.
 
-## Logs & Monitoring
+## Logs & Monitoring (Splunk)
 
 Choosing Splunk as a tool for Monitoring and Auditing logs offers substantial benefits for the proposed architecture. Splunk is known as a leading operational intelligence platform that offers advanced solutions for log data management and analysis, as well as providing valuable insights for real-time monitoring, security, auditing, and data analysis. Its flexibility, scalability, and advanced features make it a popular choice across industries for log analysis, security monitoring, regulatory compliance, and more.
 
@@ -97,15 +97,15 @@ CREATE TABLE pokemon (
 
 This section describes how the project structure, folders and files are organized.
 
-| Folder           | Description                                 |
-| ---------------- | ------------------------------------------- |
-| /                | Root context redirects to the frontend app  |
-| /.env            | Configure Env variables for containers      |
-| /docs            | Documentations                              |
-| /conf            | Some configurations used by containers      |
-| /db              | Initial schema                              |
-| /backend         | Backend implemented with spring boot        |
-| /frontend        | Frontend implemented with Angular           |
+| Folder           | Description                                         |
+| ---------------- | ----------------------------------------------------|
+| /                | Contains README and docker-compose.yml              |
+| /.env            | Dir for Env variables used by containers            |
+| /conf            | Configurations used by containers via volumes mount |
+| /docs            | Documentations                                      |
+| /db              | Initial schema                                      |
+| /backend         | Backend App implemented with spring boot            |
+| /frontend        | Frontend App implemented with Angular               |
 
 
 # Environment requirements
@@ -116,17 +116,7 @@ This section describes how the project structure, folders and files are organize
 
 # Setup the environment
 
-This application is ready to be executed using localhost DNS or the specific DNSs below:
-
-- app.pokestation.com
-- auth.pokestation.com
-
-To use the specific DNSs, before running the docker-compose, we need to configure the following DNSs in your `/etc/hosts` file, to be able to access the application using these DNSs:
-
-```
-127.0.0.1       app.pokestation.com
-127.0.0.1       auth.pokestation.com
-```
+This application is ready to be executed using localhost DNS.
 
 # Runningthe Solution
 
@@ -134,7 +124,7 @@ To use the specific DNSs, before running the docker-compose, we need to configur
 
 > docker-compose up -d --build
 
-* The --build is required in the first time, or when something is modified in the project.
+* The --build option is only required in the first time, or if something is modified in the frontend/backend projects.
 
 2. After all containers has started, open the browser with the URL: http://localhost and use one of the users below.
 

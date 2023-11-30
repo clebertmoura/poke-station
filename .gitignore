@@ -3,3 +3,7 @@ backend/logs
 conf/splunk/etc/system/local/README
 conf/splunk/etc/system/local/migration.conf
 conf/splunk/etc/system/local/server.conf
+conf/splunk/etc/system/local/distsearch.conf
+conf/splunk/etc/system/local/eventtypes.conf
+conf/splunk/etc/system/local/serverclass.conf
+conf/splunk/etc/system/local/web-features.conf

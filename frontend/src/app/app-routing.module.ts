@@ -8,13 +8,13 @@ const routes: Routes = [
   {
     path: '',
     component: TrainersComponent,
-    data: { roles: ['ADMIN'] },
+    data: { roles: ['ADMIN', 'USER'] },
     canActivate: [AuthGuard],
   },
   {
     path: 'trainer/:id',
     component: TrainerDetailComponent,
-    data: { roles: ['ADMIN'] },
+    data: { roles: ['ADMIN', 'USER'] },
     canActivate: [AuthGuard],
   },
 ];
