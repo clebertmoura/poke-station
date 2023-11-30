@@ -87,12 +87,11 @@ services:
       - pokestation-backend-logs:/usr/src/app/logs
     command: ["./mvnw", "spring-boot:run"]
     restart: always
-    # healthcheck:
-    #   test: ["CMD", "curl", "--head", "-fsS", "http://localhost:8080/health/ready"]
-    #   interval: 10s
-    #   timeout: 5s
-    #   retries: 5
-    #   start_period: 120s
+    healthcheck:
+      test: ["CMD", "sh", "-c", "curl -f http://localhost:8080/backend/actuator/health || echo 'Health check failed'"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
     networks:
       - pokestation-network
     depends_on:
