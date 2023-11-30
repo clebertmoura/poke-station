@@ -44,11 +44,15 @@ services:
       - "443:443"
     networks:
       - pokestation-network
-    # depends_on:
-    #   keycloak:
-    #     condition: service_started
-    #   backend:
-    #     condition: service_started
+    depends_on:
+      keycloak:
+        condition: service_started
+      backend:
+        condition: service_started
+      frontend:
+        condition: service_started
+      splunk:
+        condition: service_healthy
 
   keycloak:
     image: quay.io/keycloak/keycloak:22.0.5
@@ -61,11 +65,11 @@ services:
       - ./conf/keycloak/import/:/opt/keycloak/data/import:ro
     restart: always
     healthcheck:
-      test: "curl -f http://keycloak:8080/health"
-      interval: 10s
-      timeout: 5s
+      test: ["CMD", "sh", "-c", "curl -f http://localhost:8080/health || echo 'Health check failed'"]
+      interval: 30s
+      timeout: 10s
       retries: 5
-      start_period: 120s
+      #start_period: 120s
     networks:
       - pokestation-network
     depends_on:
@@ -80,6 +84,7 @@ services:
       - "8443:8443"
     volumes:
       - ./backend:/usr/src/app
+      - pokestation-backend-logs:/usr/src/app/logs
     command: ["./mvnw", "spring-boot:run"]
     restart: always
     # healthcheck:
@@ -106,7 +111,33 @@ services:
     networks:
       - pokestation-network
     depends_on:
-      - backend
+      keycloak:
+        condition: service_started
+      backend:
+        condition: service_started
+
+  splunk:
+    image: splunk/splunk:latest
+    environment:
+      - SPLUNK_START_ARGS=--accept-license
+      - SPLUNK_USER=splunk
+      - SPLUNK_PASSWORD=splunk@123
+      - SPLUNK_ENABLE_LISTEN=9997
+    ports:
+      - "8000:8000"
+      - "8088:8088"
+      - "8089:8089"
+      - "9997:9997"
+    volumes:
+      - pokestation-splunk-data:/opt/splunk/var
+      - pokestation-backend-logs:/opt/splunk/etc/apps/pokestation-backend/logs
+      - ./conf/splunk/etc/system/local/:/opt/splunk/etc/system/local/:rw
+    restart: always
+    networks:
+      - pokestation-network
+    depends_on:
+      backend:
+        condition: service_started
 
   # metabase:
   #   image: metabase/metabase:v0.36.7
@@ -127,6 +158,10 @@ services:
 
 volumes:
   pokestation-postgres-data:
+    driver: local
+  pokestation-splunk-data:
+    driver: local
+  pokestation-backend-logs:
     driver: local
 
 networks: 

@@ -1,1 +1,5 @@
 .env/dev.env
+backend/logs
+conf/splunk/etc/system/local/README
+conf/splunk/etc/system/local/migration.conf
+conf/splunk/etc/system/local/server.conf

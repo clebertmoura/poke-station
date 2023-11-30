@@ -38,7 +38,7 @@ public class PokemonService {
             trainerRepository.findById(trainerId).orElse(null)
         );
         var savedPokemon = pokemonRepository.save(pokemonEntity);
-        log.info("Saved pokemon, {} ", savedPokemon);
+        log.info("Saved pokemon, {} ", name);
         return savedPokemon;
     }
 
@@ -47,6 +47,7 @@ public class PokemonService {
         if (pokemon != null) {
             log.info("Removing pokemon, name {}", pokemon.getName());
             pokemonRepository.delete(pokemon);
+            log.info("Removed pokemon, name {}", pokemon.getName());
         }
         return pokemon;
     }

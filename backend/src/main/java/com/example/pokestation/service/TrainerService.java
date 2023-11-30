@@ -29,7 +29,7 @@ public class TrainerService {
         log.info("Saving trainer, email {}", email);
         var trainerEntity = new Trainer(name, email, instagramLink);
         var savedTrainer = trainerRepository.save(trainerEntity);
-        log.info("Saved trainer, id {} ", savedTrainer.getId());
+        log.info("Saved trainer, email {}", email);
         return savedTrainer;
     }
 
