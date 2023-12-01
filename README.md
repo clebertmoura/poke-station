@@ -126,7 +126,7 @@ This application is ready to be executed using localhost DNS.
 
 * The --build option is only required in the first time, or if something is modified in the frontend/backend projects.
 
-2. After all containers has started, open the browser with the URL: http://localhost and use one of the users below.
+2. After all containers has started, open the browser with the URL: http://localhost to access the PokeStation App and use one of the users below.
 
 # Testing users
 
@@ -134,3 +134,14 @@ This application is ready to be executed using localhost DNS.
 | ------ | -------- |
 | admin  | admin    |
 | user   | user     |
+
+# Others services
+
+To access others services available in the solution, you can use the following URLs and credentials defined in the `.env/dev.env` file.
+
+| Service                | URL                      |
+| ---------------------- | -------------------------|
+| Keycloak admin console | http://localhost/admin   |
+| pgAdmin console        | http://localhost/pgadmin |
+| Keycloak admin console | http://localhost/admin   |
+| Splunk Web             | http://localhost/splunk  |
